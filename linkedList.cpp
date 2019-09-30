@@ -16,7 +16,7 @@ node *initializeList(int value){
 }
 
 //Add node to the end of a linked list
-void addItemAtEnd(node *head, int value){
+void addNodeAtEnd(node *head, int value){
 	//temporary pointer
 	node *temp = head->next;
 	//new node
@@ -42,7 +42,9 @@ void addItemAtEnd(node *head, int value){
 //traverse linked list iteratively
 void traverseList(node *head){
 	//head node
-	cout << head->value << "\n";
+	if(head != NULL){
+		cout << head->value << "\n";
+	}
 	//temporary pointer
 	node *temp = head->next;
 	//check if list contains only 1 node
@@ -61,6 +63,12 @@ void traverseList(node *head){
 
 //traverse linked list recursively
 void traverseListRecursively(node *head){
+	//check if list is empty
+	if(head == NULL){
+		cout << "List is empty\n";
+		return;
+	}
+	//exit method when temp arrives at last node
 	if(head->next == NULL){
 		cout << head->value << "\n";
 		return;
@@ -72,6 +80,10 @@ void traverseListRecursively(node *head){
 //get linked list length
 int getListLength(node *head){
 	int length = 1;
+	//check if list is empty
+	if(head == NULL){
+		return 0;
+	}
 	node *temp = head->next;
 	//check if list contains only 1 node
 	if(temp == NULL){
@@ -84,14 +96,41 @@ int getListLength(node *head){
 	return length;
 }
 
+void deleteNodeAtEnd(node *&head){
+	//check if list is empty
+	if(head == NULL){
+		return;
+	}
+	//check if list contains only 1 node
+	if(head->next == NULL){
+		cout << head;
+		cout << "deleting head \n";
+		free(head);
+		head = NULL;
+		return;
+	}
+	while(head != NULL){
+		if(head->next->next == NULL){
+			free(head->next);
+			head->next = NULL;
+			return;
+		}
+		head = head->next;
+	}
+}
+
 int main(){
 	node *head = initializeList(1);
-	addItemAtEnd(head, 2);
-	addItemAtEnd(head, 3);
-	addItemAtEnd(head, 4);
-	addItemAtEnd(head, 5);
-	addItemAtEnd(head, 6);
+	addNodeAtEnd(head, 2);
+	addNodeAtEnd(head, 3);
+
 	traverseListRecursively(head); //1 2 3 4 5 6
+	cout << "Linked list length is: " << getListLength(head) << "\n"; // 6
+
+	deleteNodeAtEnd(head);
+	cout << "After deletion: " << "\n";
+	traverseListRecursively(head); //1 2 3 4 5 6
+
 	cout << "Linked list length is: " << getListLength(head); // 6
 
 	cout << "\n";
