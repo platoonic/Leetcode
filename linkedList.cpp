@@ -39,6 +39,7 @@ void addItemAtEnd(node *head, int value){
 	}
 }
 
+//traverse linked list iteratively
 void traverseList(node *head){
 	//head node
 	cout << head->value << "\n";
@@ -58,14 +59,42 @@ void traverseList(node *head){
 	}
 }
 
+//traverse linked list recursively
+void traverseListRecursively(node *head){
+	if(head->next == NULL){
+		cout << head->value << "\n";
+		return;
+	}
+	cout << head->value << "\n";
+	return traverseListRecursively(head->next);
+}
+
+//get linked list length
+int getListLength(node *head){
+	int length = 1;
+	node *temp = head->next;
+	//check if list contains only 1 node
+	if(temp == NULL){
+		return length;
+	}
+	while(temp != NULL){
+		length += 1;
+		temp = temp->next;
+	}
+	return length;
+}
+
 int main(){
 	node *head = initializeList(1);
 	addItemAtEnd(head, 2);
 	addItemAtEnd(head, 3);
 	addItemAtEnd(head, 4);
 	addItemAtEnd(head, 5);
-	traverseList(head); //1 2 3 4 5
+	addItemAtEnd(head, 6);
+	traverseListRecursively(head); //1 2 3 4 5 6
+	cout << "Linked list length is: " << getListLength(head); // 6
 
+	cout << "\n";
 	return 0;
 }
 
