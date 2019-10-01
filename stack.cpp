@@ -35,6 +35,7 @@ int pop(node **head){
 	}
 	int value = temp->value;
 	cout << "Pop: " << value << "\n";
+	free(*head);
 	*head = (*head)->next;
 	return value;
 }
