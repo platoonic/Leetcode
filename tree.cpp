@@ -83,17 +83,35 @@ void searchTree(node *root, int value){
 	}
 }
 
+void invertedTree(node *root){
+	if(root == NULL){
+		return;
+	}
+	invertedTree(root->left);
+	invertedTree(root->right);
+	if(root->left != NULL || root->right != NULL){
+		cout << "Inverting node: " << root->value << "\n";
+		node* copy = root->left;
+		root->left = root->right;
+		root->right = copy;
+		return;
+	}
+	return;
+}
+
 int main(){
 	// Binary Search Tree
-	node* root = createNode(5);
-	cout << "Added " << 5 << "\n";
-	addNode(&root, 9);
-	addNode(&root, 3);
+	node* root = createNode(4);
+	cout << "Added " << 4 << "\n";
+	addNode(&root, 2);
+	addNode(&root, 7);
 	addNode(&root, 1);
-	addNode(&root, 4);
+	addNode(&root, 3);
+	addNode(&root, 6);
+	addNode(&root, 9);
 
-	postorderTraversal(root);
-	searchTree(root, 1);
+	invertedTree(root);
+	inorderTraversal(root);
 	return 0;
 }
 
