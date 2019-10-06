@@ -7,15 +7,13 @@
 
 #include <iostream>
 #include <unordered_map>
-#include <algorithm>
 
 using namespace std;
 
-void checkStringsPermutation(string input1, string input2){
-	// Make sure 2 strings are the same length
+bool checkStringsPermutation(string input1, string input2){
+	// If strings are different in length then they're not perm. of each other
 	if(input1.length() != input2.length()){
-		cout << "Not Permutation";
-		return;
+		return false;
 	}
 	
 	unordered_map<char, bool> map;
@@ -26,17 +24,18 @@ void checkStringsPermutation(string input1, string input2){
 
 	for(int i = 0; i < input2.length(); i++){
 		if(map.find(input2[i]) == map.end()){
-			cout << "Not Permutation";
-			return;
+			return false;
 		}
 	}
 
-	cout << "Permutation";
-	return;
+	return true;
 }
 
 int main(){
-	checkStringsPermutation(" zgb", " zbg");
+	if(checkStringsPermutation("zsz", "zzs"))
+		cout << "Permutation";
+	else
+		cout << "Not Permutation";
 
 	cout << "\n";
 	return 0;
