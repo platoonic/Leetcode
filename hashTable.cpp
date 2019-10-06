@@ -60,7 +60,7 @@ bool searchLinkedList(node* head, int value) {
 /*
 	
 	Hash Table functions
-
+	
 */
 
 // Use array of linked list to store key's index
@@ -105,39 +105,12 @@ int main() {
 	insertHashTable(3);
 	insertHashTable(2);
 	insertHashTable(1);
-
+	
 	searchHashTable(4); // Not Found
-
+	
 	cout << "\n";
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
